@@ -2,3 +2,5 @@
 scripts
 *.dev*
 *.stg*
+web/package-lock.json
+/data

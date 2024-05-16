@@ -8,6 +8,7 @@ RUN npm install
 
 COPY . ./
 
+# nginx 서버를 사용할 경우 
 RUN npm run build
 
 FROM nginx:latest
@@ -20,4 +21,8 @@ COPY nginx/nginx.conf /etc/nginx/conf.d
 
 EXPOSE 80
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"] 
+
+# node 서버를 사용할 경우
+#EXPOSE 8088
+#CMD ["npm", "start"] 
