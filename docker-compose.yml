@@ -13,7 +13,7 @@ services:
     image: relatedcode/relatedchat-web:latest
     container_name: relatedchat_web
     ports:
-      - "80:80"
+      - "8088:80"  # Changed from "80:80"
     depends_on:
       - relatedchat_api
 
