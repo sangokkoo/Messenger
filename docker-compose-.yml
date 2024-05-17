@@ -1,9 +1,6 @@
-version: '3.8'
-
 services:
   3dchat_api:
-    build:
-      context: ./api
+    image: relatedcode/relatedchat-api:latest
     container_name: 3dchat_api
     ports:
       - "4001:4001"
@@ -12,25 +9,23 @@ services:
     volumes:
       - config_files:/app/config
 
-  3dchat_web:
-    build:
-      context: ./web
-      dockerfile: Dockerfile
-    container_name: 3dchat_web    
-    ports:
-      - "8088:8088"  # Changed from "8088:80" <- "80:80"
-    depends_on:
-      - 3dchat_api
-    volumes:      
-      - ./web:/app   # 호스트의 web 디렉터리를 컨테이너의 /app 디렉터리에 마운트
-      - /app/node_modules  # node_modules를 캐싱하여 설치 시간을 줄이기 위함 
-    environment:
-      - CHOKIDAR_USEPOLLING=true  # 파일 변경 감지를 위한 환경 변수 설정 (선택 사항) 
+  #3dchat_web:
+  #  build:
+  #    context: ./web
+  #    dockerfile: Dockerfile
+  #  container_name: 3dchat_web    
+  #  ports:
+  #    - "8088:8088"  # Changed from "8088:80" <- "80:80"
+  #  depends_on:
+  #    - 3dchat_api
+  #  volumes:      
+  #    - ./web:/app   # 호스트의 web 디렉터리를 컨테이너의 /app 디렉터리에 마운트
+  #    - /app/node_modules  # node_modules를 캐싱하여 설치 시간을 줄이기 위함 
+  #  environment:
+  #    - CHOKIDAR_USEPOLLING=true  # 파일 변경 감지를 위한 환경 변수 설정 (선택 사항) 
     
 
   gqlserver:
-    #build: 
-    #  context: ./gqlserver
     image: relatedcode/gqlserver:latest
     container_name: gqlserver
     ports:
@@ -73,8 +68,6 @@ services:
       - config_files:/app/config
 
   gqlserver_admin:
-    #build:
-    #  context: ./gqlserver-admin
     image: relatedcode/gqlserver-admin:latest
     container_name: gqlserver_admin
     ports:
